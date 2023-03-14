@@ -4,6 +4,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define TXT_BOLD "\033[1m"
+#define TXT_NRM "\033[0m"
+
+#define COLOR_NRM  "\x1B[0m"
+#define COLOR_RED  "\x1B[1;31m"
+#define COLOR_GRN  "\x1B[1;32m"
+#define COLOR_YEL  "\x1B[1;33m"
+#define COLOR_BLU  "\x1B[1;34m"
+#define COLOR_MAG  "\x1B[1;35m"
+#define COLOR_CYN  "\x1B[1;36m"
+#define COLOR_WHT  "\x1B[1;37m"
+
 #define MAX_ARGS 15
 #define MAX_PATH 50
 #define MAX_INPUT_LENGHT 1024
@@ -49,7 +61,8 @@ int PrintPrompt()
        perror("getcwd() error");
        return 1;
    }
-    printf("root@local:%s$ ", cwd);
+    printf("%sroot@local%s:%s%s%s$ ",COLOR_GRN, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
+
 }
 
 void DisplayHelp()
