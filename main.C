@@ -118,11 +118,9 @@ int main()
     while (1)
     {
         PrintPrompt();
-
-        fgets(usr_input, MAX_INPUT_LENGHT, stdin);
-
         
-
+        // Get user input
+        fgets(usr_input, MAX_INPUT_LENGHT, stdin);
 
         token = strtok(usr_input, " \n");
         int i = 0;
