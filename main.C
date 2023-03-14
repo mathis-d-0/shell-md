@@ -50,18 +50,39 @@ void DisplaySplashScreen()
 printf("%s", asciiArt);
 printf("\n\nWelcome to MDShell!\n");
 printf("You can type commands like any other shell.\n\n");
+printf("Type %s%sexit%s%s to exit the shell and %s%shelp%s%s to get help.\n\n",TXT_BOLD, COLOR_YEL, TXT_NRM, COLOR_NRM, TXT_BOLD, COLOR_YEL, TXT_NRM, COLOR_NRM);
 }
 
+// 
+// Print the prompt
+//
 int PrintPrompt()
 {
+
+    //Get the current path
     char cwd[MAX_PATH];
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
-
    } else {
        perror("getcwd() error");
        return 1;
    }
-    printf("%sroot@local%s:%s%s%s$ ",COLOR_GRN, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
+
+   //Reduce the user directory to "~"
+    char* homedir = getenv("HOME");
+    if (homedir != NULL && strncmp(cwd, homedir, strlen(homedir)) == 0) {
+        snprintf(cwd, sizeof(cwd), "~%s", cwd + strlen(homedir));
+    }
+
+    //Get the hostname
+   char hostname[25];
+   if (gethostname(hostname, 25) != -1) { 
+   } else {
+    perror("gethostname() error");
+    return 1;
+   }
+
+
+    printf("%sroot@%s%s:%s%s%s$ ", COLOR_GRN, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
 
 }
 
