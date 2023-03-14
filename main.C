@@ -24,7 +24,7 @@ void Initialize()
         printf("!! No config file in home diectory !!\n\n");
     }
 }
-cccccbcubib
+
 void DisplaySplashScreen()
 {
     char* asciiArt = "  __  __ _____   _____ _          _ _ \n"
