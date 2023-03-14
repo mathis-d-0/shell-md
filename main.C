@@ -73,16 +73,19 @@ int PrintPrompt()
         snprintf(cwd, sizeof(cwd), "~%s", cwd + strlen(homedir));
     }
 
+    //Get the username
+    char *username = getlogin();
+
     //Get the hostname
    char hostname[25];
-   if (gethostname(hostname, 25) != -1) { 
+   if (gethostname(hostname, 25) == 0) { 
    } else {
     perror("gethostname() error");
     return 1;
    }
 
 
-    printf("%sroot@%s%s:%s%s%s$ ", COLOR_GRN, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
+    printf("%s%s@%s%s:%s%s%s$ ", COLOR_GRN, username, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
 
 }
 

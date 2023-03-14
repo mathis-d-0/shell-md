@@ -1,8 +1,7 @@
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        
-   } else {
-       perror("getcwd() error");
-       return 1;
-   }
-
-    printf("%s", cwd);
+    //Get the hostname
+//    char hostname[25];
+//    if (gethostname(hostname, 25) == 0) { 
+//    } else {
+//     perror("gethostname() error");
+//     return 1;
+//    }
