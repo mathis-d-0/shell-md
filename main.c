@@ -20,6 +20,9 @@
 #define COLOR_CYN  "\x1B[1;36m"
 #define COLOR_WHT  "\x1B[1;37m"
 
+#define BG_NRM "\e[49m"
+#define BG_DGR "\e[100m"
+
 #define MAX_ARGS 15
 #define MAX_PATH 50
 #define MAX_INPUT_LENGHT 1024
@@ -97,7 +100,7 @@ int PrintPrompt()
 
     strftime(time_string, sizeof(time_string), "%H:%M:%S", time_info);
 
-    printf("%s╭%s %s%s@%s%s:%s%s%s\n╰$ ", TXT_BOL, time_string, COLOR_GRN, username, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
+    printf("%s╭%s%s%s %s%s@%s%s:%s%s%s\n╰$ ", TXT_BOL, BG_DGR, time_string, BG_NRM, COLOR_BLU, username, hostname, COLOR_NRM, COLOR_YEL, cwd, COLOR_NRM);
 
 }
 
