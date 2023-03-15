@@ -128,7 +128,7 @@ void DisplayHelp()
 
 
 // 
-// ---- Function for the prompt ----
+// ---- Function for the cd command ----
 //
 void ChangeDirectory(char *dir)
 {
