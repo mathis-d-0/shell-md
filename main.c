@@ -3,9 +3,13 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
-#define TXT_BOLD "\033[1m"
 #define TXT_NRM "\033[0m"
+#define TXT_BOL "\033[1m"
+#define TXT_DIM "\033[2m"
+#define TXT_UND "\033[4m"
+#define TXT_BLI "\033[5m"
 
 #define COLOR_NRM  "\x1B[0m"
 #define COLOR_RED  "\x1B[1;31m"
@@ -22,11 +26,11 @@
 #define F_OK 0
 
 
-
 void Initialize()
 {
 
     system("clear");
+    char* homedir = getenv("HOME");
     char* configfile = "Test";
 
     if (access(configfile, F_OK) == 0) {
@@ -49,8 +53,8 @@ void DisplaySplashScreen()
 
 printf("%s", asciiArt);
 printf("\n\nWelcome to MDShell!\n");
-printf("You can type commands like any other shell.\n\n");
-printf("Type %s%sexit%s%s to exit the shell and %s%shelp%s%s to get help.\n\n",TXT_BOLD, COLOR_YEL, TXT_NRM, COLOR_NRM, TXT_BOLD, COLOR_YEL, TXT_NRM, COLOR_NRM);
+printf("%sYou can type commands like any other shell.%s\n\n", TXT_DIM, TXT_NRM);
+printf("Type %s%sexit%s%s to exit the shell and %s%shelp%s%s to get help.\n\n",TXT_BOL, COLOR_YEL, TXT_NRM, COLOR_NRM, TXT_BOL, COLOR_YEL, TXT_NRM, COLOR_NRM);
 }
 
 // 
@@ -84,8 +88,16 @@ int PrintPrompt()
     return 1;
    }
 
+    time_t current_time;
+    struct tm* time_info;
+    char time_string[9];
 
-    printf("%s%s@%s%s:%s%s%s$ ", COLOR_GRN, username, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
+    time(&current_time);
+    time_info = localtime(&current_time);
+
+    strftime(time_string, sizeof(time_string), "%H:%M:%S", time_info);
+
+    printf("%s╭%s %s%s@%s%s:%s%s%s\n╰$ ", TXT_BOL, time_string, COLOR_GRN, username, hostname, COLOR_NRM, COLOR_BLU, cwd, COLOR_NRM);
 
 }
 
@@ -118,7 +130,7 @@ int main()
     while (1)
     {
         PrintPrompt();
-        
+
         // Get user input
         fgets(usr_input, MAX_INPUT_LENGHT, stdin);
 
@@ -153,7 +165,5 @@ int main()
         }
         
     }
-
-    
     return 0;
 }
