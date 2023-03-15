@@ -5,12 +5,14 @@
 #include <unistd.h>
 #include <time.h>
 
+// -- Define the text styles
 #define TXT_NRM "\033[0m"
 #define TXT_BOL "\033[1m"
 #define TXT_DIM "\033[2m"
 #define TXT_UND "\033[4m"
 #define TXT_BLI "\033[5m"
 
+// -- Define the text colors
 #define COLOR_NRM  "\x1B[0m"
 #define COLOR_RED  "\x1B[1;31m"
 #define COLOR_GRN  "\x1B[1;32m"
@@ -20,15 +22,20 @@
 #define COLOR_CYN  "\x1B[1;36m"
 #define COLOR_WHT  "\x1B[1;37m"
 
+// -- Define the text backgrounds
 #define BG_NRM "\e[49m"
 #define BG_DGR "\e[100m"
 
+// -- Define the general constants
 #define MAX_ARGS 15
 #define MAX_PATH 50
 #define MAX_INPUT_LENGHT 1024
 #define F_OK 0
 
 
+// 
+// ---- Function for the basic elements ----
+//
 void Initialize()
 {
 
@@ -44,6 +51,10 @@ void Initialize()
     }
 }
 
+
+// 
+// ---- Function for the splashscreen ----
+//
 void DisplaySplashScreen()
 {
     char* asciiArt = "  __  __ _____   _____ _          _ _ \n"
@@ -60,8 +71,9 @@ printf("%sYou can type commands like any other shell.%s\n\n", TXT_DIM, TXT_NRM);
 printf("Type %s%sexit%s%s to exit the shell and %s%shelp%s%s to get help.\n\n",TXT_BOL, COLOR_YEL, TXT_NRM, COLOR_NRM, TXT_BOL, COLOR_YEL, TXT_NRM, COLOR_NRM);
 }
 
+
 // 
-// Print the prompt
+// ---- Function for the prompt ----
 //
 int PrintPrompt()
 {
@@ -104,12 +116,20 @@ int PrintPrompt()
 
 }
 
+
+// 
+// ---- Function for the help page ----
+//
 void DisplayHelp()
 {
     system("clear");
     printf("Help\n");
 }
 
+
+// 
+// ---- Function for the prompt ----
+//
 void ChangeDirectory(char *dir)
 {
     if (dir == NULL) {
@@ -119,6 +139,10 @@ void ChangeDirectory(char *dir)
     }
 }
 
+
+// 
+// ---- Main function ----
+//
 int main()
 {
 
