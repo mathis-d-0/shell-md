@@ -36,7 +36,7 @@
 // 
 // ---- Function for the basic elements ----
 //
-void Initialize()
+int Initialize()
 {
 
     system("clear");
@@ -48,6 +48,13 @@ void Initialize()
     } 
     else {
         printf("!! No config file in home diectory !!\n\n");
+    }
+
+
+    int result = putenv("CLICOLOR=1");
+    if (result != 0) {
+        perror("putenv failed");
+        return 1;
     }
 }
 
@@ -170,11 +177,15 @@ int main()
         args[i] = NULL;
 
 
-        if(strtok(usr_input," \n\t") == NULL) continue;
+        if(strtok(usr_input," \n\t") == NULL) {
+            printf("\n");
+            continue;
+        }
         if(strcmp(usr_input, "exit") == 0) return 0;
         if(strcmp(usr_input, "help") == 0) DisplayHelp();
         if (strcmp(args[0], "cd") == 0) {
             ChangeDirectory(args[1]);
+            printf("\n");
             continue;
         }
 
@@ -190,7 +201,7 @@ int main()
         } else {
             waitpid(pid, &status, 0);
         }
-        
+        printf("\n");
     }
     return 0;
 }
